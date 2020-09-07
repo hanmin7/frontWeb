@@ -167,19 +167,21 @@ public class MemberDAO {
 	
 	
 	
-	public void delete(MemberVo memberVo) {
+	public int delete(MemberVo memberVo) {
+		int r=0;
 		try {
 			conn = ConnectionManager.getConnnect();
 			String sql = "DELETE MEMBER WHERE ID=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, memberVo.getId());
-			int r = pstmt.executeUpdate();
+			r = pstmt.executeUpdate();
 			System.out.println(r + "건이 수정됨");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			ConnectionManager.close(null, pstmt, conn);
 		}
+		return r;
 	} //삭제
 	
 	
