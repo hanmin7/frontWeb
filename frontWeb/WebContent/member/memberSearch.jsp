@@ -7,10 +7,9 @@
 <title>memberSearch.jsp</title>
 </head>
 <body>
-<script>
 
-alert(${error})
-</script>
+${error}
+
 <form action="${pageContext.request.contextPath}/memberSearch.do">
 	id : <input name="id">
 	<button>검색</button>
