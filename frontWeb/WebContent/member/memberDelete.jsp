@@ -10,7 +10,7 @@
 ${error}
 <form action="${pageContext.request.contextPath}/memberDelete.do">
 	삭제할 id : <input name="id">
-	<button>검색</button>
+	<button>삭제</button>
 </form>
 </body>
 </html>

@@ -29,7 +29,7 @@ public class FrontController extends HttpServlet {
 	String charset = null;
 	HashMap<String, Controller> list = null;
 	
-	
+	//메모리 로딩 1번만 - init()  url <-> sub controller 매핑
     @Override
 	public void init(ServletConfig config) throws ServletException {
     	charset = config.getInitParameter("charset"); //initparam_name 읽음
@@ -41,11 +41,11 @@ public class FrontController extends HttpServlet {
     	list.put("/memberList.do", new MemberListController());
 	}
 
-    
+    //요청시마다 service()
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding(charset);
-		String uri = request.getRequestURI();   			//   /frontWeb/memberInsert.do
-		String contextPath = request.getContextPath();      //	 frontWeb
+		String uri = request.getRequestURI();   			//   frontWeb/memberInsert.do
+		String contextPath = request.getContextPath();      //	 frontWeb 이뒤를 잘라야하니까
 		String path = uri.substring(contextPath.length());  //   /memberInsert.do
 		Controller subController = list.get(path);
 		subController.execute(request, response);
