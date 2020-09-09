@@ -36,6 +36,10 @@ public class MemberInsertController implements Controller {
 		member.setMailyn(mailyn);
 		member.setHobby(Arrays.toString(hobby));
 		
+		if(member.getMailyn()==null) {
+			member.setMailyn("N");
+		}
+		
 		//서비스 처리
 		int r = MemberDAO.getInstance().insert(member);
 		

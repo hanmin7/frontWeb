@@ -186,7 +186,8 @@ public class MemberDAO {
 	
 	
 
-	public void update(MemberVo memberVo) {
+	public int update(MemberVo memberVo) {
+		int r=0;
 		try {
 			conn = ConnectionManager.getConnnect();
 			String sql = "UPDATE MEMBER SET PW = ?, JOB = ?, REASON = ?, MAILYN = ?, HOBBY = ? WHERE ID=?";
@@ -197,13 +198,14 @@ public class MemberDAO {
 			pstmt.setString(4, memberVo.getMailyn());
 			pstmt.setString(5, memberVo.getHobby());
 			pstmt.setString(6, memberVo.getId());
-			int r = pstmt.executeUpdate(); // 이때는 executeUpdate()에 sql안들어감.
+			r = pstmt.executeUpdate(); // 이때는 executeUpdate()에 sql안들어감.
 			System.out.println(r + "건이 수정됨");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			ConnectionManager.close(conn);
 		}
+		return r;
 	} //업뎃
 
 	

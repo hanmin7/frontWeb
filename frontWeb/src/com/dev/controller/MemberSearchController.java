@@ -14,6 +14,14 @@ public class MemberSearchController implements Controller {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("회원검색");
+		//job에 따라서 포워드 페이지 지정
+		String path = "memberSearch.jsp";
+		String job = request.getParameter("job");
+		if(job.equals("delete")) {
+			path = "memberDelete.jsp";
+		} else if(job.equals("update")) {
+			path = "memberUpdate.jsp";
+		}
 		
 		//파라미터 변수에 저장
 		String id = request.getParameter("id");
@@ -23,7 +31,7 @@ public class MemberSearchController implements Controller {
 		if(id.isEmpty()) {
 			request.setAttribute("error", "id를 입력하시오");
 			//search페이지로 포워드
-			request.getRequestDispatcher("/member/memberSearch.jsp").forward(request, response);
+			request.getRequestDispatcher("/member/"+path).forward(request, response);
 			return ;
 		}
 			
@@ -35,7 +43,12 @@ public class MemberSearchController implements Controller {
 		request.setAttribute("memberOne", member);
 		
 		//조회결과를 저장 후에 결과 페이지로 포워드
-		request.getRequestDispatcher("/member/memberSearchOutput.jsp").forward(request, response);
+		if(job.equals("search")) {
+			request.getRequestDispatcher("/member/memberSearchOutput.jsp").forward(request, response);			
+		} else {
+			request.getRequestDispatcher("/member/"+path).forward(request, response);			
+			
+		}
 	}
 
 }

@@ -19,12 +19,11 @@ public class MemberDeleteController implements Controller {
 		String id = request.getParameter("id");
 		
 		//유효성 체크 id값이 널인가아닌가
-		if (id.isEmpty()) {
-			request.setAttribute("error", "id를 입력하시오");
-			// search페이지로 포워드
-			request.getRequestDispatcher("/member/memberDelete.jsp").forward(request, response);
-			return;
-		}
+		/*
+		 * if (id.isEmpty()) { request.setAttribute("error", "id를 입력하시오"); // search페이지로
+		 * 포워드 request.getRequestDispatcher("/member/memberDelete.jsp").forward(request,
+		 * response); return; }
+		 */  // search로 검색하고 나온그사람을 삭제하기때문에 여기서 id널값처리 필요없음.
 		
 		//vo
 		MemberVo member = new MemberVo();
@@ -37,7 +36,8 @@ public class MemberDeleteController implements Controller {
 		request.setAttribute("cnt", r);
 		
 		//뷰페이지이동
-		request.getRequestDispatcher("/member/memberDeleteOutput.jsp").forward(request, response);
+		request.getRequestDispatcher("/member/memberDelete.jsp").forward(request, response);
+		//request.getRequestDispatcher("/member/memberDeleteOutput.jsp").forward(request, response);
 	}
 
 }
